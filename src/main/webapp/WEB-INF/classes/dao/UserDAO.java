@@ -1,14 +1,10 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 import javax.naming.NamingException;
-
-import util.ConnectionPool;
+import util.*;
 
 public class UserDAO {
 
@@ -28,12 +24,8 @@ public class UserDAO {
             return (count == 1) ? true : false;
             
         } finally {
-            if (stmt != null) {
-            	stmt.close(); 
-            }
-            if (conn != null) {
-            	conn.close();
-            }
+            if (stmt != null) stmt.close(); 
+            if (conn != null) conn.close();
         }
     }
     
@@ -53,12 +45,8 @@ public class UserDAO {
             
         } finally {
             if (rs != null) rs.close(); 
-            if (stmt != null) {
-            	stmt.close(); 
-            }
-            if (conn != null) {
-            	conn.close();
-            }
+            if (stmt != null) stmt.close(); 
+            if (conn != null) conn.close();
         }
     }
 
@@ -76,12 +64,8 @@ public class UserDAO {
             return (count == 1) ? true : false;
             
         } finally {
-            if (stmt != null) {
-            	stmt.close(); 
-            }
-            if (conn != null) {
-            	conn.close();
-            }
+            if (stmt != null) stmt.close(); 
+            if (conn != null) conn.close();
         }
     }
 
@@ -97,25 +81,15 @@ public class UserDAO {
             stmt.setString(1, uid);
             
             rs = stmt.executeQuery();
-            if (!rs.next()) {
-            	return 1;
-            }
-            if (!upass.equals(rs.getString("password"))) {
-            	return 2;
-            }
+            if (!rs.next()) return 1;
+            if (!upass.equals(rs.getString("password"))) return 2;
 
             return 0;
             
         } finally {
-            if (rs != null) {
-            	rs.close(); 
-            }
-            if (stmt != null) {
-            	stmt.close(); 
-            }
-            if (conn != null) {
-            	conn.close();
-            }
+            if (rs != null) rs.close(); 
+            if (stmt != null) stmt.close(); 
+            if (conn != null) conn.close();
         }
     }
 
