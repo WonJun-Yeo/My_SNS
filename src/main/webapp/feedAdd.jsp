@@ -29,7 +29,6 @@
                 ufile = item.get();
                 String root = application.getRealPath(java.io.File.separator);
                 FileUtil.saveImage(root, ufname, ufile);
-                out.print("이미지 업로드가 완료되었습니다.");
             }
         }
     }
