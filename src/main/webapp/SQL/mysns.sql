@@ -3,11 +3,9 @@ DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 USE mysns;
 
-CREATE TABLE IF NOT EXISTS user(
-    id VARCHAR(128) PRIMARY KEY, -- "email"
-    password VARCHAR(32),
-    name VARCHAR(32),
-    ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS user (
+    id varchar(128) primary key,
+    jsonstr varchar(1024)
 );
 
 CREATE TABLE IF NOT EXISTS feed (

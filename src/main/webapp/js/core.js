@@ -5,7 +5,7 @@ var AJAX = {
             type: "post", 
             data: params, 
             dataType: "text",
-            success: func,
+            success: func, 
             error: function (xhr, status, error) {
                 if (xhr.status == 0) {
                     alert("네트워크 접속이 원할하지 않습니다.");
