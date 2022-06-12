@@ -81,6 +81,8 @@ input[type=file] {
 			$("#content").focus();
 			return;
 		}
+		
+		var jsonobj = {id: _uid, content: content, ts: getTime()};
 
 		var imgobj = $("#image")[0].files[0];
 
@@ -102,6 +104,7 @@ input[type=file] {
 			if (code == "ER") {
 				alert("작성 글의 업로드 중 오류가 발생하였습니다.");
 			} else {
+				DataCache.remove("mainCache");
 				alert("작성 글의 업로드가 완료되었습니다.");
 				window.location.href = "main.html";
 			}

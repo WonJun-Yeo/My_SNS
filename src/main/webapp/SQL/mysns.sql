@@ -13,3 +13,9 @@ CREATE TABLE IF NOT EXISTS feed (
     id VARCHAR(128),
     jsonstr varchar(8192)
 );
+
+CREATE TABLE IF NOT EXISTS friend (
+	id varchar(128),
+	frid varchar(128),
+	INDEX idx1(id)
+);

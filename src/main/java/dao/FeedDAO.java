@@ -100,37 +100,33 @@ public class FeedDAO {
 		}
 	}
 
-	public String getGroup(String maxNo) throws NamingException, SQLException {
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		try {
-			String sql = "SELECT jsonstr FROM feed";
-			if (maxNo != null) {
-				sql += " WHERE no < " + maxNo;
-			}
-			sql += " ORDER BY no DESC LIMIT 3";
-
-			conn = ConnectionPool.get();
-			stmt = conn.prepareStatement(sql);
-			rs = stmt.executeQuery();
-
-			String str = "[";
-			int cnt = 0;
-			while (rs.next()) {
-				if (cnt++ > 0)
-					str += ", ";
-				str += rs.getString("jsonstr");
-			}
-			return str + "]";
-
-		} finally {
-			if (rs != null)
-				rs.close();
-			if (stmt != null)
-				stmt.close();
-			if (conn != null)
-				conn.close();
-		}
-	}
+	public String getGroup(String frids, String maxNo) throws NamingException, SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT jsonstr FROM feed WHERE id IN (" + frids + ")";
+            if (maxNo != null) {
+                sql += " AND no < " + maxNo;
+            }
+            sql += " ORDER BY no DESC LIMIT 3";
+            
+            conn = ConnectionPool.get();
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+            String str = "[";
+            int cnt = 0;
+            while(rs.next()) {
+                if (cnt++ > 0) str += ", ";
+                str += rs.getString("jsonstr");
+            }
+            return str + "]";
+            
+        } finally {
+            if (rs != null) rs.close(); 
+            if (stmt != null) stmt.close(); 
+            if (conn != null) conn.close();
+        }
+    }
 }

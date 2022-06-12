@@ -11,8 +11,8 @@
 	<div class="page-body">
 		<div class="page-mnu">
 			<div class="menu" onclick="addFeed()">글쓰기</div>
-			<div class="menu" onclick="">친구보기</div>
-			<div class="menu" onclick="">내정보</div>
+			<div class="menu" onclick="showFriends()">친구보기</div>
+			<div class="menu" onclick="showUserInfo()">내정보</div>
 		</div>
 		<div id="list" class="section"></div>
 		<div class="section mtop-10 mbot-30 pad-16">
@@ -30,8 +30,21 @@ $(document).ready(function() {
 });
 
 var minNo = -1;
+var feedList = [];
+var frIds = null;
 function start(uid) {
-	var feeds = DataCache.get("mainCache");
+    frIds = '"' + uid + '"';
+    AJAX.call("friendList.jsp", {id: uid}, function(data) {
+        var list = JSON.parse(data.trim());
+        for (var i=0; i<list.length; i++) {
+        	frIds += ', "' + list[i].id + '"';
+        }
+        start2(uid);
+    });
+}
+
+function start2(uid) {
+    var feeds = DataCache.get("mainCache");
     if (feeds != null) {
         console.log("[start] fetch the existing feed list from DataCache ...");
         console.log(feeds);
@@ -40,7 +53,7 @@ function start(uid) {
         show(feeds);
     }
     else {
-        AJAX.call("feedGetGroup.jsp", null, function(data) {
+        AJAX.call("feedGetGroup.jsp", {frids: frIds}, function(data) {
             var feeds = JSON.parse(data.trim());
             console.log("[start] fetch a new feed list from the server ...");
             console.log(feeds);
@@ -69,7 +82,13 @@ function getFeedCode(feed) {
 
     var str = "<div class='feed' onclick='showFeed(" + feed.no + ")'>";
     str += "<div class='author'>";
-    str += "<div class='photo'></div>";
+    if (feed.user == null || feed.user.images == null) {
+        str += "<div class='photo'></div>";
+    }
+    else {
+        var imgstr = "images/" + feed.user.images[0];
+        str += "<div class='photo' style='background-image: url(\"" + imgstr + "\")'></div>";
+    }
     str += "<div class='name'>" + name + "</div>";
     str += "</div>";
 
@@ -83,26 +102,29 @@ function getFeedCode(feed) {
     return str;
 }
 
-function show(feeds) {
-    for (var i = 0; i < feedList.length; i++) {
-    	if (feedList[i].no == fno) {
-    		Page.go("feedView.html", feedList[i]);
-    		return;
-    	}
-    }
-}
-
 function getNext() {
-	var params = {maxNo : minNo};
-	AJAX.call("feedGetGroup.jsp", params, function(data) {
-		var feeds = JSON.parse(data.trim());
-		feedList = feedList.concat(feeds);
+    if (minNo <= 1) {
+        alert("더이상 작성글이 존재하지 않습니다.");
+        return;
+    }
+    var params = {frids: frIds, limit: minNo};
+    AJAX.call("feedGetGroup.jsp", params, function(data) {
+        var feeds = JSON.parse(data.trim());
+        feedList = feedList.concat(feeds);
         DataCache.set("mainCache", feedList);
-		show(feeds);
-	});
+        show(feeds);
+    });
 }
 
 function addFeed() {
 	window.location.href="feedAdd.html";
+}
+
+function showFriends() {
+	window.location.href = "friend.html";
+}
+
+function showUserInfo() {
+	window.location.href = "userInfo.html";
 }
 </script>
