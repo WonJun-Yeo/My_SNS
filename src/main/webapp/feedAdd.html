@@ -61,9 +61,10 @@ input[type=file] {
 	$(document).ready(function() {
 		Page.init(start);
 	});
-
+	
+	var _uid = null;
 	function start(uid) {
-		// page setup
+		_uid = uid;
 	}
 
 	function upload() {
