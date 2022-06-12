@@ -8,7 +8,7 @@
 <%
     request.setCharacterEncoding("utf-8");
 
-    String uid = null, ucon = null, ufname = null;
+	String jsonstr = null, ufname = null;
     byte[] ufile = null;
 
     ServletFileUpload sfu = new ServletFileUpload(new DiskFileItemFactory());
@@ -20,8 +20,9 @@
         String name = item.getFieldName();
         if(item.isFormField()) {
             String value = item.getString();
-            if (name.equals("id")) uid = value;
-            else if (name.equals("content")) ucon = value;
+            if (name.equals("jsonstr")) {
+            	jsonstr = value;
+            }
         }
         else {
             if (name.equals("image")) {
@@ -34,7 +35,7 @@
     }
 
     FeedDAO dao = new FeedDAO();
-    if (dao.insert(uid, ucon, ufname)) {
+    if (dao.insert(jsonstr)){
         out.print("OK");
     } else {
         out.print("ER");

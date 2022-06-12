@@ -6,6 +6,7 @@
 	background-color: #f9f9f9;
 	border-bottom: 1px solid #eee;
 }
+
 .page-mnu .menu {
 	float: left;
 	padding: 0px 10px;
@@ -19,12 +20,14 @@
 	background-color: white;
 	border-top: 1px solid #f4f4f4;
 }
+
 .feed .author {
 	float: left;
 	width: 100%;
 	padding: 10px 16px;
 	box-sizing: border-box;
 }
+
 .feed .author .photo {
 	float: left;
 	padding: 5px;
@@ -37,12 +40,14 @@
 	background-repeat: no-repeat;
 	overflow: hidden;
 }
+
 .feed .author .name {
 	float: left;
 	margin-left: 10px;
 	line-height: 42px;
 	font-weight: bold;
 }
+
 .feed .image {
 	float: left;
 	width: 100%;
@@ -52,6 +57,7 @@
 	background-repeat: no-repeat;
 	overflow: hidden;
 }
+
 .feed .text {
 	float: left;
 	width: 100%;
@@ -61,7 +67,7 @@
 	overflow: hidden; 
 	text-overflow: ellipsis; 
 	display: -webkit-box;
-	-webkit-line-clamp: 4; 		/* line number */	
+	-webkit-line-clamp: 4;	
 	-webkit-box-orient: vertical; 
 	word-wrap: break-word;
 }
