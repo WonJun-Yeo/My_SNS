@@ -19,7 +19,7 @@
         FileItem item = (FileItem) iter.next();
         String name = item.getFieldName();
         if(item.isFormField()) {
-            String value = item.getString();
+            String value = item.getString("utf-8");
             if (name.equals("jsonstr")) {
             	jsonstr = value;
             }

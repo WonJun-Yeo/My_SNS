@@ -105,7 +105,6 @@ public class UserDAO {
             JSONObject obj = (JSONObject) (new JSONParser()).parse(jsonstr);
             String pass = obj.get("password").toString();
             
-            
             if (!upass.equals(pass)) {
             	return 2;
             }
@@ -145,10 +144,10 @@ public class UserDAO {
         	   str += rs.getString("jsonstr");
            }
            return str + "]";
-            
+           
         } finally {
-            if (rs != null) rs.close(); 
-            if (stmt != null) stmt.close(); 
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
             if (conn != null) conn.close();
         }
     }

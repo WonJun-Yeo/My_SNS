@@ -48,8 +48,7 @@ public class FeedDAO {
 					usrobj.remove("ts");
 					jsonobj.put("user", usrobj);
 				}
-				stmt.close();
-				rs.close();
+				stmt.close(); rs.close();
 
 				sql = "INSERT INTO feed(no, id, jsonstr) VALUES(?, ?, ?)";
 				stmt = conn.prepareStatement(sql);

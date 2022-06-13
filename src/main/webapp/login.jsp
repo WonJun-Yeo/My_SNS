@@ -9,9 +9,11 @@
     UserDAO dao = new UserDAO();
     int code = dao.login(uid, upass);
     if (code == 1) {
+    	// Not Exist
     	out.print("NE");
     }
     else if (code == 2) {
+    	// Password Error
     	out.print("PE");
     }
     else {

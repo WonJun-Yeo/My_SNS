@@ -21,7 +21,7 @@
         if(item.isFormField()) {
             String value = item.getString("utf-8");
             if (name.equals("id")) uid = value;
-            else if (name.equals("jsonstr")) jsonstr = value;
+            if (name.equals("jsonstr")) jsonstr = value;
         }
         else {
             if (name.equals("image")) {
