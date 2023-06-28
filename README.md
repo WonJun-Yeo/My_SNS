@@ -1,4 +1,4 @@
-# My SNS
+# My_SNS
 Back End Personal_Project started in 2022.06.06
 
 ## Concept
